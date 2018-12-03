@@ -1,0 +1,25 @@
+{
+    "name": "fastnoise",
+    "source": "@GEM@/External/FastNoiseSIMD/0.8.0",
+    "description": "Noise library",
+    "includes": [],
+    "lib_required": "True",
+    "platform": {
+        "win_x64_vs2013": {
+            "importlibpath_debug": [
+                "build/Debug"
+            ],
+            "importlibpath_release": [
+                "build/Release"
+            ],
+            "import": [
+                "fastNoise.lib"
+            ],
+            "shared": [
+                "fastNoise.dll"
+            ]
+        },
+        "win_x64_vs2015": "@win_x64_vs2013",
+        "win_x64_vs2017": "@win_x64_vs2013"
+    }
+}

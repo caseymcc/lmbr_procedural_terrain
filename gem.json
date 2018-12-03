@@ -1,0 +1,15 @@
+{
+    "GemFormatVersion": 4,
+    "Uuid": "409f2a934d6742b1a258f0e69359de4f",
+    "Name": "ProceduralTerrain",
+    "DisplayName": "ProceduralTerrain",
+    "Version": "0.1.0",
+    "Summary": "Generate Terrain",
+    "Tags": ["Untagged"],
+    "IconPath": "preview.png",
+    "Modules": [
+        {
+            "Type": "GameModule"
+        }
+    ]
+}

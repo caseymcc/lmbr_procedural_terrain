@@ -1,0 +1,14 @@
+{
+    "auto": {
+        "Include": [
+            "Include/ProceduralTerrain/ProceduralTerrainBus.h"
+        ],
+        "Source": [
+            "Source/ProceduralTerrainModule.cpp",
+            "Source/ProceduralTerrainComponent.cpp",
+            "Source/ProceduralTerrainComponent.h",
+//            "Source/ProceduralTerrainSystemComponent.cpp",
+//            "Source/ProceduralTerrainSystemComponent.h"
+        ]
+    }
+}
