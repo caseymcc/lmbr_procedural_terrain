@@ -104,15 +104,29 @@ namespace fs=std::experimental::filesystem;
 namespace FastNoise
 {
 
-size_t NoiseSIMD::s_currentSIMDLevel=std::numeric_limits<size_t>::max();
-std::vector<NoiseFuncs> NoiseSIMD::m_noiseSimds(6);
+std::vector<NoiseFuncs> g_noiseSimds(6);
 
+size_t NoiseSIMD::s_currentSIMDLevel=std::numeric_limits<size_t>::max();
+
+
+bool NoiseSIMD::SetSIMDLevel(SIMDType type)
+{
+    size_t index=(size_t)type;
+
+    if(index>=g_noiseSimds.size())
+        return false;
+    if(!g_noiseSimds[index].createFunc)
+        return false;
+
+    s_currentSIMDLevel=index;
+    return true;
+}
 
 bool NoiseSIMD::registerNoiseSimd(SIMDType type, NewNoiseSimdFunc createFunc, AlignedSizeFunc alignedSizeFunc, GetEmptySetFunc getEmptySetFunc)
 {
-    m_noiseSimds[(size_t)type].createFunc=createFunc;
-    m_noiseSimds[(size_t)type].alignedSizeFunc=alignedSizeFunc;
-    m_noiseSimds[(size_t)type].getEmptySetFunc=getEmptySetFunc;
+    g_noiseSimds[(size_t)type].createFunc=createFunc;
+    g_noiseSimds[(size_t)type].alignedSizeFunc=alignedSizeFunc;
+    g_noiseSimds[(size_t)type].getEmptySetFunc=getEmptySetFunc;
 
     return true;
 }
@@ -233,7 +247,7 @@ size_t NoiseSIMD::GetFastestSIMD()
     //see which simd levels are loaded
     while(simd>0)
     {
-        if(m_noiseSimds[simd].createFunc)
+        if(g_noiseSimds[simd].createFunc)
             return simd;
 
         simd--;
@@ -247,30 +261,30 @@ NoiseSIMD* NoiseSIMD::New(int seed)
 {
     GetSIMDLevel();
 
-    if(m_noiseSimds[s_currentSIMDLevel].createFunc)
-        return m_noiseSimds[s_currentSIMDLevel].createFunc(seed);
+    if(g_noiseSimds[s_currentSIMDLevel].createFunc)
+        return g_noiseSimds[s_currentSIMDLevel].createFunc(seed);
 
-    return m_noiseSimds[(size_t)SIMDType::None].createFunc(seed);
+    return g_noiseSimds[(size_t)SIMDType::None].createFunc(seed);
 }
 
 size_t NoiseSIMD::AlignedSize(size_t size)
 {
     GetSIMDLevel();
 
-    if(m_noiseSimds[s_currentSIMDLevel].alignedSizeFunc)
-        return m_noiseSimds[s_currentSIMDLevel].alignedSizeFunc(size);
+    if(g_noiseSimds[s_currentSIMDLevel].alignedSizeFunc)
+        return g_noiseSimds[s_currentSIMDLevel].alignedSizeFunc(size);
 
-    return m_noiseSimds[(size_t)SIMDType::None].alignedSizeFunc(size);
+    return g_noiseSimds[(size_t)SIMDType::None].alignedSizeFunc(size);
 }
 
 float* NoiseSIMD::GetEmptySet(size_t size)
 {
     GetSIMDLevel();
 
-    if(m_noiseSimds[s_currentSIMDLevel].getEmptySetFunc)
-        return m_noiseSimds[s_currentSIMDLevel].getEmptySetFunc(size);
+    if(g_noiseSimds[s_currentSIMDLevel].getEmptySetFunc)
+        return g_noiseSimds[s_currentSIMDLevel].getEmptySetFunc(size);
 
-    return m_noiseSimds[(size_t)SIMDType::None].getEmptySetFunc(size);
+    return g_noiseSimds[(size_t)SIMDType::None].getEmptySetFunc(size);
 }
 
 size_t NoiseSIMD::GetSIMDLevel()

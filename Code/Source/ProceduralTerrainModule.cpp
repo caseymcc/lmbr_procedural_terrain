@@ -1,41 +1,49 @@
 
+#include <platform_impl.h>
 
 #include <AzCore/Memory/SystemAllocator.h>
-#include <AzCore/Module/Module.h>
+//#include <AzCore/Module/Module.h>
 
+#include <ProceduralTerrainModule.h>
 #include <ProceduralTerrainSystemComponent.h>
-#include <ProceduralTerrain/ProceduralTerrainComponent.h>
+#include <ProceduralTerrainComponent.h>
+#ifdef EDITOR_MODULE
+#include <ProceduralTerrainEditorComponent.h>
+#endif
 
 namespace ProceduralTerrain
 {
 
-class ProceduralTerrainModule
-    : public AZ::Module
+ProceduralTerrainModule::ProceduralTerrainModule()
+    : CryHooksModule()
 {
-public:
-    AZ_RTTI(ProceduralTerrainModule, "{13E651F6-5CEA-40D1-B714-16BAD34FC46B}", AZ::Module);
-    AZ_CLASS_ALLOCATOR(ProceduralTerrainModule, AZ::SystemAllocator, 0);
-
-    ProceduralTerrainModule()
-        : AZ::Module()
-    {
-        // Push results of [MyComponent]::CreateDescriptor() into m_descriptors here.
-        m_descriptors.insert(m_descriptors.end(), {
+    // Push results of [MyComponent]::CreateDescriptor() into m_descriptors here.
+    m_descriptors.insert(m_descriptors.end(), {
 //            ProceduralTerrainSystemComponent::CreateDescriptor(),
-            ProceduralTerrainComponent::CreateDescriptor()
-        });
-    }
+        ProceduralTerrainComponent::CreateDescriptor()
+    });
 
-    /**
-        * Add required SystemComponents to the SystemEntity.
-        */
-    AZ::ComponentTypeList GetRequiredSystemComponents() const override
-    {
-        return AZ::ComponentTypeList{
-            azrtti_typeid<ProceduralTerrainSystemComponent>(),
-        };
-    }
-};
+#ifdef EDITOR_MODULE
+    m_descriptors.insert(m_descriptors.end(), {
+        ProceduralTerrainEditorComponent::CreateDescriptor()
+    });
+#endif//EDITOR_MODULE
+}
+
+/**
+    * Add required SystemComponents to the SystemEntity.
+    */
+AZ::ComponentTypeList ProceduralTerrainModule::GetRequiredSystemComponents() const
+{
+    return AZ::ComponentTypeList{
+        azrtti_typeid<ProceduralTerrainSystemComponent>(),
+    };
+}
+
+void ProceduralTerrainModule::OnCrySystemInitialized(ISystem& system, const SSystemInitParams& systemInitParams)
+{
+    CryHooksModule::OnCrySystemInitialized(system, systemInitParams);
+}
 
 }//namespace ProceduralTerrain
 

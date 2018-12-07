@@ -1,0 +1,10 @@
+{
+    "auto": {
+        "Include": [
+        ],
+        "Source": [
+            "Source/ProceduralTerrainEditorComponent.cpp",
+            "Source/ProceduralTerrainEditorComponent.h"
+        ]
+    }
+}

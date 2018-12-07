@@ -4,7 +4,7 @@
 #include <AzCore/Component/Component.h>
 #include <AzCore/RTTI/BehaviorContext.h>
 
-#include "River.h"
+#include "ProceduralTerrain.h"
 
 namespace ProceduralTerrain
 {
@@ -23,5 +23,6 @@ namespace ProceduralTerrain
         static void GetRequiredServices(AZ::ComponentDescriptor::DependencyArrayType& required);
 
     private:
+        ProceduralTerrain m_terrain;
     };
 }

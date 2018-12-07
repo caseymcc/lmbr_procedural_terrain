@@ -127,7 +127,7 @@ enum class SIMDType { None, Neon, SSE2, SSE4_1, AVX2, AVX512 };
 enum class NoiseClass {Single, Fractal, Cellular};
 enum class BuildType {Default, Map, Vector };
 
-struct NoiseDetails
+struct FASTNOISE_EXPORT NoiseDetails
 {
     NoiseDetails():
         seed(1337),
@@ -165,7 +165,7 @@ struct NoiseDetails
     float  cellularJitter;
 };
 
-struct PerturbDetails
+struct FASTNOISE_EXPORT PerturbDetails
 {
     PerturbDetails():
         Amp(1.0f),
@@ -197,7 +197,7 @@ typedef NoiseSIMD *(*NewNoiseSimdFunc)(int);
 typedef size_t(*AlignedSizeFunc)(size_t);
 typedef float *(*GetEmptySetFunc)(size_t);
 
-struct NoiseFuncs
+struct FASTNOISE_EXPORT NoiseFuncs
 {
     NoiseFuncs():createFunc(nullptr), alignedSizeFunc(nullptr), getEmptySetFunc(nullptr) {}
 
@@ -235,18 +235,18 @@ public:
     // -1: Auto-detect fastest supported (Default)
     // Caution: Setting this manually can cause crashes on CPUs that do not support that level
     // Caution: Changing this after creating NoiseSIMD objects has undefined behaviour
-    static bool SetSIMDLevel(SIMDType type)
-    {
-        size_t index=(size_t)type;
-
-        if(index>=m_noiseSimds.size())
-            return false;
-        if(!m_noiseSimds[index].createFunc)
-            return false;
-
-        s_currentSIMDLevel=index;
-        return true;
-    }
+    static bool SetSIMDLevel(SIMDType type);
+//    {
+//        size_t index=(size_t)type;
+//
+//        if(index>=m_noiseSimds.size())
+//            return false;
+//        if(!m_noiseSimds[index].createFunc)
+//            return false;
+//
+//        s_currentSIMDLevel=index;
+//        return true;
+//    }
 
     // Free a noise set from memory
     static void FreeNoiseSet(float* noiseSet);
@@ -405,7 +405,6 @@ protected:
     PerturbDetails m_perturbDetails;
 
     static size_t s_currentSIMDLevel;
-    static std::vector<NoiseFuncs> m_noiseSimds;
     static float CalculateFractalBounding(int octaves, float gain);
 };
 

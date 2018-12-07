@@ -4,11 +4,14 @@
             "Include/ProceduralTerrain/ProceduralTerrainBus.h"
         ],
         "Source": [
+            "Source/ProceduralTerrain.cpp",
+            "Source/ProceduralTerrain.h",
             "Source/ProceduralTerrainModule.cpp",
+            "Source/ProceduralTerrainModule.h",
             "Source/ProceduralTerrainComponent.cpp",
             "Source/ProceduralTerrainComponent.h",
-//            "Source/ProceduralTerrainSystemComponent.cpp",
-//            "Source/ProceduralTerrainSystemComponent.h"
+            "Source/ProceduralTerrainSystemComponent.cpp",
+            "Source/ProceduralTerrainSystemComponent.h"
         ]
     }
 }
