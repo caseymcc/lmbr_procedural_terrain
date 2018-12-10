@@ -54,12 +54,12 @@ void ProceduralTerrainEditorComponent::Reflect(AZ::ReflectContext* context)
 
         if(auto editContext=serializeContext->GetEditContext())
         {
-            editContext->Class<EditorRoadComponent>("Procedural Terrain", "Generate Terrain using noise functions")
+            editContext->Class<ProceduralTerrainEditorComponent>("Procedural Terrain", "Generate Terrain using noise functions")
                 ->ClassElement(AZ::Edit::ClassElements::EditorData, "")
                 ->Attribute(AZ::Edit::Attributes::Category, "Terrain")
                 ->Attribute(AZ::Edit::Attributes::AppearsInAddComponentMenu, AZ_CRC("Game", 0x232b318c))
                 ->Attribute(AZ::Edit::Attributes::AutoExpand, true)
-                ->DataElement(AZ::Edit::UIHandlers::Default, &EditorRoadComponent::m_terrain, "Terrain", "")
+                ->DataElement(AZ::Edit::UIHandlers::Default, &ProceduralTerrainEditorComponent::m_terrain, "Terrain", "")
                 ->Attribute(AZ::Edit::Attributes::Visibility, AZ::Edit::PropertyVisibility::ShowChildrenOnly)
                 ->Attribute(AZ::Edit::Attributes::AutoExpand, true)
                 ;

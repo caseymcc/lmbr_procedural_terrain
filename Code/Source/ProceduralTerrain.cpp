@@ -70,12 +70,6 @@ void ProceduralTerrain::Reflect(AZ::ReflectContext* context)
     }
 }
 
-void ProceduralTerrain::GetRequiredServices(AZ::ComponentDescriptor::DependencyArrayType& required)
-{
-//        required.push_back(AZ_CRC("SplineService"));
-//        required.push_back(AZ_CRC("TransformService"));
-}
-
 void ProceduralTerrain::UpdateNoise()
 {
     if(m_noise!=nullptr)
