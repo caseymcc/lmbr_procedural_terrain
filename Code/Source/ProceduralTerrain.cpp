@@ -99,4 +99,6 @@ void ProceduralTerrain::UpdateTerrain()
 //    }
 }
 
+AZ_CLASS_ALLOCATOR_IMPL(ProceduralTerrain, AZ::SystemAllocator, 0);
+
 }//namespace ProceduralTerrain
