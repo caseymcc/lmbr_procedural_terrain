@@ -6,7 +6,8 @@
 #include <AzCore/Memory/Memory.h>
 #include <AzCore/Component/Component.h>
 
-#include <FastNoiseSIMD/FastNoiseSIMD.h>
+//#include <FastNoiseSIMD/FastNoiseSIMD.h>
+#include <voxigen/heightmapMeshBuilder.h>
 
 namespace ProceduralTerrain
 {
@@ -26,7 +27,7 @@ namespace ProceduralTerrain
         void UpdateNoise();
         void UpdateTerrain();
 
-        FastNoise::NoiseSIMD *m_noise;
+//        FastNoise::NoiseSIMD *m_noise;
         int m_noiseSeed;
         float m_noiseFrequency;
 
@@ -34,6 +35,6 @@ namespace ProceduralTerrain
         int m_heightmapWidth;
         int m_heightmapHeight;
 
-        std::vector<float> m_noiseMap;
+//        std::vector<float> m_noiseMap;
     };
 }

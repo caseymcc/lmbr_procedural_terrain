@@ -10,14 +10,14 @@ def build(bld):
             bld.Path('Code/Sandbox'),
             'Source'
         ],
-        uselib=['fastnoise'],
+        uselib=['VOXIGEN'],
 
         Editor = dict(
             disable_pch = True,
             features = ['qt5', 'ExternalLyIdentity', 'ExternalLyMetrics'],
 
             defines             = ["EDITOR_MODULE"],
-            uselib=['QT5CORE', 'QT5QUICK', 'QT5QML','QT5GUI', 'QT5WIDGETS'],
+            uselib=['VOXIGEN', 'QT5CORE', 'QT5QUICK', 'QT5QML','QT5GUI', 'QT5WIDGETS'],
             includes =
             [
                 bld.Path('Code/CryEngine/CryCommon'),

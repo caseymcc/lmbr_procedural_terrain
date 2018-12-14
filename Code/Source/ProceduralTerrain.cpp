@@ -10,7 +10,7 @@ namespace ProceduralTerrain
 
 void ProceduralTerrain::Activate(AZ::EntityId entityId)
 {
-    m_noise=nullptr;
+//    m_noise=nullptr;
 
 //    IEditor *editor;
 //    CHeightmap *heigthMap;
@@ -22,17 +22,17 @@ void ProceduralTerrain::Activate(AZ::EntityId entityId)
 //    m_heightmapWidth=heightmap->GetWidth();
 //    m_heightmapHeight=heightmap->GetHeight();   
 
-    m_noiseMap.resize(m_heightmapWidth*m_heightmapHeight);
-
-    FastNoise::NoiseSIMD::loadSimd("./");
-    size_t simdLevel=FastNoise::NoiseSIMD::GetFastestSIMD();
+//    m_noiseMap.resize(m_heightmapWidth*m_heightmapHeight);
+//
+//    FastNoise::NoiseSIMD::loadSimd("./");
+//    size_t simdLevel=FastNoise::NoiseSIMD::GetFastestSIMD();
 }
 
 void ProceduralTerrain::Deactivate()
 {
-    if(m_noise!=nullptr)
-        delete m_noise;
-    m_noise=nullptr;
+//    if(m_noise!=nullptr)
+//        delete m_noise;
+//    m_noise=nullptr;
 }
 
 void ProceduralTerrain::Reflect(AZ::ReflectContext* context)
@@ -72,10 +72,10 @@ void ProceduralTerrain::Reflect(AZ::ReflectContext* context)
 
 void ProceduralTerrain::UpdateNoise()
 {
-    if(m_noise!=nullptr)
-        delete m_noise;
-
-    m_noise=FastNoise::NoiseSIMD::New(m_noiseSeed);
+//    if(m_noise!=nullptr)
+//        delete m_noise;
+//
+//    m_noise=FastNoise::NoiseSIMD::New(m_noiseSeed);
 }
 
 void ProceduralTerrain::UpdateTerrain()
